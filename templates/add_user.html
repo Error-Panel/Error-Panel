@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block title %}Add User - Error Panel{% endblock %}
+{% block page_title %}Provision New License{% endblock %}
+{% block page_subtitle %}Create a new user that will be instantly synchronized with Firebase DB.{% endblock %}
+
+{% block content %}
+<div class="card glass animate-fade" style="max-width: 600px; margin: 0 auto;">
+    <div class="card-title">
+        <span></span>
+        License Details
+    </div>
+    <form action="/add_user" method="post">
+        <div class="form-group">
+            <label><i class="fas fa-user-tag"></i> Username</label>
+            <input type="text" name="username" class="input-field" placeholder="Enter license name" required>
+        </div>
+        
+        <div class="form-group">
+            <label><i class="fas fa-key"></i> Passcode</label>
+            <input type="text" name="password" class="input-field" placeholder="Enter license password" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+                <label><i class="fas fa-calendar-day"></i> Validity Days</label>
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <button type="button" class="btn glass" style="padding: 5px 12px; font-size: 0.8rem;" onclick="setDays(1)">1D</button>
+                    <button type="button" class="btn glass" style="padding: 5px 12px; font-size: 0.8rem;" onclick="setDays(7)">7D</button>
+                    <button type="button" class="btn glass" style="padding: 5px 12px; font-size: 0.8rem;" onclick="setDays(30)">30D</button>
+                </div>
+                <input type="number" id="input_days" name="days" class="input-field" value="30" min="1">
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-calendar-alt"></i> Custom Expiration</label>
+                <input type="datetime-local" name="custom_expire" class="input-field">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-code-branch"></i> Game Version</label>
+            <select name="version" class="input-field">
+                <option value="v1">Standard V1</option>
+                <option value="v2">Premium V2</option>
+                <option value="x64">X64 Beta</option>
+            </select>
+        </div>
+
+        <script>
+            function setDays(d) {
+                document.getElementById('input_days').value = d;
+                document.getElementsByName('custom_expire')[0].value = "";
+            }
+        </script>
+
+        <div class="form-group">
+            <label><i class="fas fa-shield-halved"></i> Access Level</label>
+            <select name="type" class="input-field">
+                <option value="3">Subscriber (Tier 3)</option>
+                <option value="2">Reseller (Tier 2)</option>
+                <option value="1">Master Administrator (Tier 1)</option>
+            </select>
+        </div>
+
+        <div style="margin-top: 2rem;">
+            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                <i class="fas fa-cloud-upload-alt"></i> CREATE & SYNC TO FIREBASE
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

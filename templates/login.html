@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Error Panel - Enter System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modern.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 45%);
+        }
+        .splash-card {
+            text-align: center;
+            padding: 3.5rem 3rem;
+            max-width: 450px;
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        .glow-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px var(--primary-glow));
+        }
+    </style>
+</head>
+<body>
+    <div class="splash-card glass animate-fade">
+        <i class="fas fa-triangle-exclamation glow-icon"></i>
+        <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem; font-weight: 800; background: linear-gradient(to right, var(--text-main), var(--text-muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Error Panel</h1>
+        <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;">Please provide administrative credentials to access the panel.</p>
+        
+        <form action="/login" method="post" style="display: flex; flex-direction: column; gap: 1.2rem; text-align: left;">
+            <div class="form-group" style="margin-bottom: 0;">
+                <label style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;"><i class="fas fa-user-shield"></i> Username</label>
+                <input type="text" name="username" class="input-field" placeholder="Enter Username" style="padding: 1rem; font-size: 1rem; margin-top: 0.4rem;" required autocomplete="username">
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 0;">
+                <label style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;"><i class="fas fa-key"></i> Password</label>
+                <input type="password" name="password" class="input-field" placeholder="Enter Password" style="padding: 1rem; font-size: 1rem; margin-top: 0.4rem;" required autocomplete="current-password">
+            </div>
+            
+            {% if error %}
+            <div style="color: #ff4b2b; background: rgba(255, 75, 43, 0.1); border: 1px solid rgba(255, 75, 43, 0.2); padding: 12px; border-radius: 10px; font-size: 0.85rem; margin-top: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fas fa-exclamation-circle"></i> <span>{{ error }}</span>
+            </div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-primary" style="font-size: 1.05rem; padding: 1rem; width: 100%; justify-content: center; margin-top: 1rem; border-radius: 12px;">
+                AUTHORIZE ACCESS <i class="fas fa-arrow-right"></i>
+            </button>
+        </form>
+    </div>
+</body>
+</html>

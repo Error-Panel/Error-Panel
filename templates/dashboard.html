@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block title %}Dashboard - Error Panel{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="card glass">
+    <div class="card-title">
+        <span></span>
+        System Status
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+        <div class="glass" style="padding: 1.5rem; background: rgba(255,255,255,0.02);">
+            <p style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Realtime DB</p>
+            <p style="font-size: 1.5rem; font-weight: 700; color: #10b981;">ONLINE</p>
+        </div>
+        <div class="glass" style="padding: 1.5rem; background: rgba(255,255,255,0.02);">
+            <p style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">RSA Encryption</p>
+            <p style="font-size: 1.5rem; font-weight: 700;">ACTIVE</p>
+        </div>
+        <div class="glass" style="padding: 1.5rem; background: rgba(255,255,255,0.02);">
+            <p style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Server Load</p>
+            <p style="font-size: 1.5rem; font-weight: 700;">NORMAL</p>
+        </div>
+    </div>
+</div>
+
+<div class="card glass">
+    <div class="card-title">
+        <span></span>
+        Developer Profile
+    </div>
+    <div class="data-table-container" style="overflow-x: auto;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Admin User</th>
+                    <th>Status</th>
+                    <th>Permissions</th>
+                    <th>Security Binding</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 32px; height: 32px; background: rgba(99, 102, 241, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                                <i class="fas fa-terminal"></i>
+                            </div>
+                            <strong>{{ user.usuario }}</strong>
+                        </div>
+                    </td>
+                    <td><span class="badge badge-success">ACTIVE</span></td>
+                    <td>{{ 'MASTER ADMIN' if user.tipo == '1' else 'RESELLER' }}</td>
+                    <td><code style="font-family: 'JetBrains Mono'; background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px;">{{ user.UID }}</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+    <div class="card glass">
+        <div class="card-title"><span></span>Quick Actions</div>
+        <div style="display: flex; gap: 1rem;">
+            <a href="/add_user" class="btn btn-primary">
+                <i class="fas fa-plus"></i> New User
+            </a>
+            <a href="/users_list" class="btn glass">
+                <i class="fas fa-list"></i> View DB
+            </a>
+        </div>
+    </div>
+    
+    <div class="card glass">
+        <div class="card-title"><span></span>Project Info</div>
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+            This project has been successfully migrated from PHP to a modern Flask/Firebase stack. 
+            All license validation now runs through optimized RSA workflows.
+        </p>
+    </div>
+</div>
+{% endblock %}
